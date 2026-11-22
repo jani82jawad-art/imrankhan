@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Justice Contact Assistant — Amplify Your Voice | Powered by Saqib</title>
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ==========================================================================
+       EDITORIAL PASTEL AURA DESIGN SYSTEM — JUSTICE CONTACT ASSISTANT
+       Airy Scandinavian gallery minimalism paired with breathing pastel mesh
+       auras, clickable semantic pills, frosted overlay sheets, and tactile
+       floating circular dock buttons.
+       ========================================================================== */
+    :root {
+      --canvas-bg: #f3f5f8;
+      --card-surface: #fbfcfd;
+      --ink-strong: #111318;
+      --ink-body: #6c7380;
+      --ink-muted: #939aa6;
+      --hot-pink: #f81b7c;
+      --aura-left: rgba(174, 206, 255, 0.76);
+      --aura-center: rgba(246, 189, 192, 0.74);
+      --aura-right: rgba(212, 246, 168, 0.80);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--ink-strong);
+      background:
+        radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.92) 0%, rgba(243, 245, 248, 0) 50%),
+        radial-gradient(circle at 82% 84%, rgba(232, 236, 244, 0.72) 0%, rgba(243, 245, 248, 0) 55%),
+        linear-gradient(165deg, #f7f8fa 0%, #f1f3f6 55%, #eceff4 100%);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Main Floating Editorial Card */
+    .insight-card {
+      position: relative;
+      background: var(--card-surface);
+      border: 1px solid rgba(255, 255, 255, 0.96);
+      box-shadow:
+        0 34px 72px -24px rgba(105, 118, 145, 0.24),
+        0 10px 24px -10px rgba(105, 118, 145, 0.11),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    }
+
+    /* Dreamy Top Pastel Mesh Aura (Periwinkle -> Blush Coral -> Soft Lime) */
+    @keyframes auraFloatA {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(14px, 8px, 0) scale(1.06); }
+    }
+
+    @keyframes auraFloatB {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-12px, 10px, 0) scale(1.08); }
+    }
+
+    @keyframes auraFloatC {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-8px, -6px, 0) scale(1.05); }
+    }
+
+    .aura-blob {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(44px);
+      pointer-events: none;
+      transition: background 0.7s ease;
+      will-change: transform;
+    }
+
+    .aura-blob-left {
+      top: -54px;
+      left: -34px;
+      width: 225px;
+      height: 210px;
+      background: var(--aura-left);
+      animation: auraFloatA 12s ease-in-out infinite;
+    }
+
+    .aura-blob-center {
+      top: -62px;
+      left: 50%;
+      margin-left: -112px;
+      width: 225px;
+      height: 200px;
+      background: var(--aura-center);
+      animation: auraFloatB 14s ease-in-out infinite;
+    }
+
+    .aura-blob-right {
+      top: -46px;
+      right: -36px;
+      width: 225px;
+      height: 210px;
+      background: var(--aura-right);
+      animation: auraFloatC 11s ease-in-out infinite;
+    }
+
+    /* Smooth bottom dissolve mask so aura melts seamlessly into white */
+    .aura-fade-mask {
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.72) 48%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.72) 48%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    /* Interactive Inline Semantic Pill Chips */
+    .semantic-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 10px 2px 7px;
+      margin: 0 1px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.92em;
+      line-height: 1.38;
+      color: #14171f;
+      vertical-align: baseline;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow: 0 2px 6px -2px rgba(20, 24, 34, 0.08);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.2s ease,
+                  filter 0.2s ease;
+    }
+
+    .semantic-pill:hover {
+      transform: translateY(-1.5px) scale(1.03);
+      box-shadow: 0 8px 16px -6px rgba(20, 24, 34, 0.16);
+    }
+
+    .semantic-pill:active {
+      transform: scale(0.97);
+    }
+
+    .semantic-pill.pill-active {
+      box-shadow:
+        0 0 0 2px rgba(17, 19, 24, 0.16),
+        0 8px 18px -6px rgba(20, 24, 34, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* Pill Color Tokens matching Reference Palette */
+    .pill-peach { background: #ffe0cf; }
+    .pill-sky   { background: #cce4ff; }
+    .pill-pink  { background: #ffd8e8; }
+    .pill-mint  { background: #caf7d0; }
+    .pill-lilac { background: #e8dcff; }
+    .pill-amber { background: #fff0c2; }
+
+    /* Tactile Floating White Circular Action Buttons */
+    .dock-circle-btn {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f9fb 100%);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow:
+        0 12px 24px -8px rgba(84, 96, 122, 0.2),
+        0 3px 8px -2px rgba(84, 96, 122, 0.08),
+        inset 0 1px 1px rgba(255, 255, 255, 1);
+      transition: transform 0.22s cubic-bezier(0.34, 1.5, 0.64, 1),
+                  box-shadow 0.22s ease,
+                  background 0.2s ease,
+                  color 0.2s ease;
+    }
+
+    .dock-circle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 16px 28px -8px rgba(84, 96, 122, 0.26),
+        0 4px 10px -2px rgba(84, 96, 122, 0.1);
+    }
+
+    .dock-circle-btn:active {
+      transform: scale(0.93);
+      box-shadow:
+        0 6px 12px -4px rgba(84, 96, 122, 0.18),
+        inset 0 2px 4px rgba(140, 152, 175, 0.12);
+    }
+
+    .dock-circle-btn.is-active {
+      background: #14171f;
+      color: #ffffff !important;
+      border-color: #14171f;
+      box-shadow: 0 12px 24px -6px rgba(17, 19, 24, 0.35);
+    }
+
+    /* Live Pink Dot Gentle Pulse */
+    @keyframes pinkPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(248, 27, 124, 0.42); }
+      50% { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(248, 27, 124, 0); }
+    }
+
+    .live-pink-dot {
+      background: var(--hot-pink);
+      animation: pinkPulse 2.8s ease-in-out infinite;
+    }
+
+    /* Soft Editorial Form Fields */
+    .editorial-input {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(203, 213, 225, 0.75);
+      box-shadow: 0 2px 8px -4px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .editorial-input:focus {
+      outline: none;
+      background: #ffffff;
+      border-color: #111318;
+      box-shadow: 0 0 0 3px rgba(17, 19, 24, 0.08), 0 4px 12px -4px rgba(15, 23, 42, 0.1);
+    }
+
+    /* Mobile performance optimization for smooth 60fps rendering */
+    @media (max-width: 640px) {
+      .aura-blob {
+        filter: blur(34px);
+      }
+      .insight-card {
+        border-radius: 34px;
+      }
+    }
+
+    /* Subtle Smooth Reveal for Inline Micro-Insight Card */
+    .micro-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.28s ease,
+                  margin 0.3s ease;
+    }
+
+    .micro-panel.open {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      margin-top: 12px;
+    }
+
+    .micro-panel-inner {
+      overflow: hidden;
+    }
+
+    /* Frosted Overlay Sheets inside the Card */
+    .card-sheet {
+      background: rgba(252, 253, 255, 0.95);
+      backdrop-filter: blur(24px) saturate(145%);
+      -webkit-backdrop-filter: blur(24px) saturate(145%);
+      transition: opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .card-sheet.sheet-hidden {
+      opacity: 0;
+      transform: translateY(20px) scale(0.985);
+      pointer-events: none;
+    }
+
+    .card-sheet.sheet-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    /* Subtle scrollbar inside sheets */
+    .soft-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .soft-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .soft-scroll::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.35);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+
+<body class="w-full min-h-screen flex flex-col justify-between px-3.5 py-5 sm:p-8 md:p-10 selection:bg-pink-200/70 selection:text-slate-900">
+
+  <!-- ========================================================================
+       AMBIENT GALLERY HEADER (Matches Editorial Pastel UI Top Lockup)
+       ======================================================================== -->
+  <header class="w-full max-w-[1120px] mx-auto flex items-start justify-between gap-4 mb-4 sm:mb-4 px-1">
+    <!-- Top-Left Brand Lockup -->
+    <div class="flex flex-col">
+      <div class="text-[20px] sm:text-[22px] font-medium tracking-[-0.02em] text-[#111318] leading-tight">
+        Voice for Justice
+      </div>
+      <div class="flex items-center gap-2 mt-1.5 pl-4 sm:pl-6">
+        <!-- Scalloped Magenta Badge SVG -->
+        <svg class="w-5 h-5 text-[#eb2175] shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 2.6c1.1 0 2.05.6 2.55 1.5.98-.32 2.08-.08 2.84.68.76.76 1 1.86.68 2.84.9.5 1.5 1.45 1.5 2.55s-.6 2.05-1.5 2.55c.32.98.08 2.08-.68 2.84-.76.76-1.86 1-2.84.68-.5.9-1.45 1.5-2.55 1.5s-2.05-.6-2.55-1.5c-.98.32-2.08.08-2.84-.68-.76-.76-1-1.86-.68-2.84-.9-.5-1.5-1.45-1.5-2.55s.6-2.05 1.5-2.55c-.32-.98-.08-2.08.68-2.84.76-.76 1.86-1 2.84-.68.5-.9 1.45-1.5 2.55-1.5Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+          <path d="M9.2 12.2l1.8 1.8 3.9-4.1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="text-[16px] sm:text-[18px] font-normal tracking-[-0.015em] text-[#989fa9]">
+          Contact assistant
+        </span>
+      </div>
+    </div>
+
+    <!-- Top-Right Editorial Caption -->
+    <p class="hidden sm:block max-w-[215px] text-[12.5px] leading-[1.48] font-normal text-[#8f96a2] text-left">
+      Amplify your voice.<br />
+      Generate &amp; send a<br />
+      personalized appeal for<br />
+      safety, rights, and justice.
+    </p>
+  </header>
+
+  <!-- ========================================================================
+       CENTER HERO STAGE — JUSTICE EMAIL ASSISTANT CARD
+       ======================================================================== -->
+  <main class="flex-1 w-full flex flex-col items-center justify-center py-1 sm:py-2">
+    <section
+      id="mainCard"
+      class="insight-card w-full max-w-[432px] rounded-[40px] overflow-hidden flex flex-col justify-between"
+      aria-label="Justice Contact Assistant Card"
+    >
+      <!-- TOP BREATHING PASTEL MESH AURA -->
+      <div class="aura-fade-mask absolute inset-x-0 top-0 h-[230px] overflow-hidden pointer-events-none select-none z-0" aria-hidden="true">
+        <div id="auraLeft" class="aura-blob aura-blob-left"></div>
+        <div id="auraCenter" class="aura-blob aura-blob-center"></div>
+        <div id="auraRight" class="aura-blob aura-blob-right"></div>
+      </div>
+
+      <!-- PRIMARY CARD CONTENT -->
+      <div class="relative z-10 flex-1 flex flex-col justify-between px-5 pt-7 pb-5 sm:px-8 sm:pt-9 sm:pb-7">
+
+        <!-- TOP SECTION: LIVE LOCAL TIME, HEADING & INTERACTIVE NARRATIVE -->
+        <div>
+          <!-- Eyebrow Live Local Date & Time Bar -->
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <time id="liveDateDisplay" class="text-[13px] sm:text-[13.5px] font-medium text-[#6c727f] tracking-[-0.01em]">
+              Loading date...
+            </time>
+            <div class="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/95 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-[#f81b7c]"></span>
+              <time id="liveTimeDisplay" class="text-[12.5px] font-bold text-[#111318] tabular-nums">--:--</time>
+            </div>
+          </div>
+
+          <!-- Main Heading + Live Pulsing Hot-Pink Dot -->
+          <div class="flex items-center gap-2.5 mt-3 mb-2.5">
+            <h1 class="text-[25px] sm:text-[30px] font-bold tracking-[-0.035em] leading-[1.12] text-[#0c0e12]">
+              Justice for Imran Khan
+            </h1>
+            <span
+              class="live-pink-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full shrink-0 mt-0.5"
+              title="Active global appeal campaign"
+            ></span>
+          </div>
+
+          <!-- Editorial Narrative with Clickable Pastel Semantic Pills -->
+          <div
+            id="narrativeContainer"
+            class="text-[14.5px] sm:text-[15.5px] leading-[1.68] tracking-[-0.012em] text-[#6d7480] font-normal"
+          >
+            <!-- Rendered dynamically via JS with clickable colored pills -->
+          </div>
+
+          <!-- EXPANDABLE INLINE MICRO-INSIGHT DRAWER (Opens when tapping any pastel pill) -->
+          <div id="microInsightPanel" class="micro-panel" aria-live="polite">
+            <div class="micro-panel-inner">
+              <div class="rounded-[22px] bg-[#f4f6fa]/95 border border-white p-3.5 shadow-inner">
+                <div class="flex items-start justify-between gap-2 mb-1">
+                  <div class="flex items-center gap-2">
+                    <span id="microBadgeDot" class="w-2.5 h-2.5 rounded-full bg-orange-400"></span>
+                    <span id="microTitle" class="text-[12.5px] font-bold text-[#14171f]">Custodial Safety</span>
+                  </div>
+                  <button
+                    id="closeMicroBtn"
+                    type="button"
+                    class="text-[11px] font-semibold text-[#8c93a0] hover:text-[#14171f] px-1.5 py-0.5 rounded-full cursor-pointer"
+                    aria-label="Close detail note"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <p id="microBody" class="text-[12px] leading-relaxed text-[#5c6370]"></p>
+                <div class="mt-2 flex items-center justify-between gap-2 pt-2 border-t border-slate-200/70">
+                  <span class="text-[11px] text-[#7c8391]">Included in generated appeal</span>
+                  <span id="microStatTag" class="text-[11px] font-semibold text-[#181b22] bg-white px-2.5 py-0.5 rounded-full shadow-sm">
+                    Priority
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================================================================
+               SIMPLIFIED FAST EMAIL FORM (Name, Country [Pakistan Default], City)
+               ================================================================ -->
+          <form id="contactForm" class="mt-5 space-y-3.5" novalidate>
+            <!-- Full Name -->
+            <div>
+              <label for="fullName" class="block text-[12.5px] font-semibold text-[#4c5360] mb-1.5 pl-1">
+                Full Name <span class="text-[#f81b7c]">*</span>
+              </label>
+              <div class="relative">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#8c93a0]">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </div>
+                <input
+                  id="fullName"
+                  type="text"
+                  required
+                  autocomplete="name"
+                  placeholder="Enter your full name"
+                  class="editorial-input w-full min-h-[46px] rounded-[18px] py-2.5 pl-10 pr-4 text-[16px] sm:text-[14.5px] text-[#111318] placeholder-[#9ca3af]"
+                />
+              </div>
+            </div>
+
+            <!-- Country (Pakistan selected by default) -->
+            <div>
+              <label for="countrySelect" class="block text-[12.5px] font-semibold text-[#4c5360] mb-1.5 pl-1">
+                Your Country <span class="text-[#f81b7c]">*</span>
+              </label>
+              <div class="relative">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-[#8c93a0]">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <select
+                  id="countrySelect"
+                  required
+                  class="editorial-input w-full min-h-[46px] rounded-[18px] py-2.5 pl-10 pr-9 text-[16px] sm:text-[14.5px] text-[#111318] appearance-none cursor-pointer"
+                >
+                  <option value="" disabled>Select your country</option>
+                  <!-- Full alphabetical country list with Pakistan pre-selected by JS -->
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-[#8c93a0]">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Optional City -->
+            <div>
+              <label for="cityInput" class="block text-[12.5px] font-semibold text-[#4c5360] mb-1.5 pl-1">
+                City <span class="text-[#9aa1ad] font-normal">(Optional)</span>
+              </label>
+              <div class="relative">
+                <input
+                  id="cityInput"
+                  type="text"
+                  autocomplete="address-level2"
+                  placeholder="e.g., Lahore, Islamabad, London"
+                  class="editorial-input w-full min-h-[46px] rounded-[18px] py-2.5 pl-4 pr-10 text-[16px] sm:text-[14.5px] text-[#111318] placeholder-[#9ca3af]"
+                />
+                <button
+                  id="clearCityBtn"
+                  type="button"
+                  class="hidden absolute inset-y-0 right-0 flex items-center px-3.5 text-[18px] text-[#9ca3af] hover:text-[#111318] transition cursor-pointer"
+                  aria-label="Clear city"
+                  title="Clear city"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+
+            <!-- Inline Validation Notice (No alert()) -->
+            <p id="formError" class="hidden text-[12.5px] font-medium text-[#e11d48] bg-rose-50 border border-rose-200/70 rounded-2xl px-3.5 py-2.5">
+              Please enter your full name to generate the email.
+            </p>
+
+            <!-- Primary CTA: Generate Email -->
+            <button
+              id="generateBtn"
+              type="submit"
+              class="w-full min-h-[50px] mt-1 rounded-full bg-[#111318] text-white text-[15px] font-semibold shadow-lg hover:bg-[#232732] active:scale-[0.985] transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <span>Generate Email</span>
+            </button>
+
+            <!-- Quick WhatsApp Share Strip -->
+            <div class="flex items-center gap-2 pt-1.5">
+              <button
+                id="quickWhatsAppBtn"
+                type="button"
+                class="flex-1 min-h-[44px] rounded-full bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#128C4A] border border-[#25D366]/30 text-[13.5px] font-semibold flex items-center justify-center gap-2 transition active:scale-[0.98] cursor-pointer"
+              >
+                <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.991c-.002 5.45-4.437 9.884-9.886 9.884" />
+                </svg>
+                <span>Share on WhatsApp</span>
+              </button>
+              <button
+                id="quickCopyShareBtn"
+                type="button"
+                class="min-h-[44px] px-4 rounded-full bg-white/95 hover:bg-white text-[#3f4654] border border-slate-200/80 text-[13.5px] font-semibold flex items-center justify-center gap-1.5 shadow-sm transition active:scale-[0.98] cursor-pointer"
+                aria-label="Copy campaign link and message"
+              >
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- BOTTOM TACTILE FLOATING CIRCULAR DOCK BUTTONS -->
+        <div class="flex items-center justify-between pt-5 mt-2">
+          <!-- Left Pair: Home/Reset & Recipients Directory -->
+          <div class="flex items-center gap-3">
+            <button
+              id="homeBtn"
+              type="button"
+              class="dock-circle-btn w-[50px] h-[50px] rounded-full flex items-center justify-center text-[#1e222b] cursor-pointer"
+              aria-label="Return to compose form"
+              title="Compose Form"
+            >
+              <svg class="w-[20px] h-[20px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.5 10.8L12 4.5l7.5 6.3V19a1.5 1.5 0 0 1-1.5 1.5h-4v-4.5a2 2 0 0 0-4 0v4.5H6A1.5 1.5 0 0 1 4.5 19v-8.2Z" />
+              </svg>
+            </button>
+
+            <button
+              id="directoryBtn"
+              type="button"
+              class="dock-circle-btn w-[50px] h-[50px] rounded-full flex items-center justify-center text-[#1e222b] cursor-pointer"
+              aria-label="Open recipients directory"
+              title="Recipients Directory"
+            >
+              <svg class="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3.6 9h16.8" />
+                <path d="M3.6 15h16.8" />
+                <path d="M11.5 3a17 17 0 0 0 0 18" />
+                <path d="M12.5 3a17 17 0 0 1 0 18" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Center Subtle Label -->
+          <span class="text-[11px] font-medium text-[#959ca9] hidden sm:inline">
+            Review before sending
+          </span>
+
+          <!-- Right Single Button: Share & Spread Sheet -->
+          <button
+            id="shareSheetBtn"
+            type="button"
+            class="dock-circle-btn w-[50px] h-[50px] rounded-full flex items-center justify-center text-[#1e222b] cursor-pointer"
+            aria-label="Open share options"
+            title="Share Campaign"
+          >
+            <svg class="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           OVERLAY SHEET 1: GENERATED EMAIL PREVIEW & ONE-CLICK SEND
+           ==================================================================== -->
+      <div
+        id="previewSheet"
+        class="card-sheet sheet-hidden absolute inset-0 z-30 p-6 sm:p-7 flex flex-col justify-between overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Generated Email Preview"
+      >
+        <div class="flex items-center justify-between gap-2 pb-3 shrink-0">
+          <div>
+            <div class="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-[#eb2175]">Ready to Send</div>
+            <h2 class="text-[22px] font-bold tracking-[-0.03em] text-[#111318] leading-tight mt-0.5">Your Appeal Email</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              id="regenerateBtn"
+              type="button"
+              class="dock-circle-btn h-10 px-3.5 rounded-full flex items-center gap-1.5 text-[12px] font-semibold text-[#111318] cursor-pointer"
+              title="Generate another variation"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                <path d="M3 3v5h5" />
+                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+                <path d="M16 16h5v5" />
+              </svg>
+              <span>Refresh</span>
+            </button>
+            <button
+              id="closePreviewBtn"
+              type="button"
+              class="dock-circle-btn w-10 h-10 rounded-full flex items-center justify-center text-[#4a5160] hover:text-[#111318] cursor-pointer"
+              aria-label="Close email preview"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <!-- Editable Fields Container -->
+        <div class="flex-1 overflow-y-auto soft-scroll space-y-3 pr-0.5">
+          <!-- To Field -->
+          <div>
+            <div class="flex items-center justify-between mb-1 pl-1">
+              <label for="previewTo" class="text-[11.5px] font-semibold text-[#5b6270]">To (Recipients)</label>
+              <button
+                id="copyToBtn"
+                type="button"
+                class="text-[11px] font-semibold text-[#eb2175] hover:underline cursor-pointer"
+              >
+                Copy emails
+              </button>
+            </div>
+            <input
+              id="previewTo"
+              type="text"
+              class="editorial-input w-full rounded-[15px] px-3.5 py-2 text-[12.5px] text-[#111318] font-medium"
+            />
+          </div>
+
+          <!-- Subject Field -->
+          <div>
+            <label for="previewSubject" class="block text-[11.5px] font-semibold text-[#5b6270] mb-1 pl-1">Subject</label>
+            <input
+              id="previewSubject"
+              type="text"
+              class="editorial-input w-full rounded-[15px] px-3.5 py-2 text-[13px] text-[#111318] font-semibold"
+            />
+          </div>
+
+          <!-- Editable Message Body -->
+          <div>
+            <div class="flex items-center justify-between mb-1 pl-1">
+              <label for="previewBody" class="text-[11.5px] font-semibold text-[#5b6270]">Message (Editable)</label>
+              <span id="variationBadge" class="text-[10.5px] font-semibold px-2 py-0.5 rounded-full pill-sky text-[#14171f]">Draft #1</span>
+            </div>
+            <textarea
+              id="previewBody"
+              rows="9"
+              class="editorial-input w-full rounded-[18px] p-3.5 text-[13px] leading-[1.6] text-[#1f2430] resize-none"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- One-Click Send Buttons (Large Open Mail in App on Mobile + Compact Side Web Option) -->
+        <div class="pt-3.5 space-y-2 shrink-0 border-t border-slate-200/70 mt-2">
+          <div class="flex items-center gap-2 sm:grid sm:grid-cols-2">
+            <button
+              id="openMailAppBtn"
+              type="button"
+              class="flex-1 min-h-[48px] sm:min-h-[44px] px-4 rounded-full bg-[#111318] text-white text-[14.5px] sm:text-[13px] font-semibold shadow-md hover:bg-[#242834] active:scale-[0.98] transition flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m22 2-7 20-4-9-9-4Z" />
+                <path d="M22 2 11 13" />
+              </svg>
+              <span>Open Mail in App</span>
+            </button>
+
+            <button
+              id="openGmailBtn"
+              type="button"
+              title="Open in Gmail Web"
+              aria-label="Open in Gmail Web"
+              class="shrink-0 min-h-[48px] sm:min-h-[44px] px-3 sm:px-4 rounded-full bg-white/90 text-[#6c7380] sm:text-[#111318] border border-slate-200/90 text-[11.5px] sm:text-[13px] font-medium sm:font-semibold shadow-sm hover:bg-white hover:text-[#111318] active:scale-[0.97] transition flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#eb2175] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <span class="sm:hidden">Web</span>
+              <span class="hidden sm:inline">Open Gmail Web</span>
+            </button>
+          </div>
+
+          <button
+            id="copyFullEmailBtn"
+            type="button"
+            class="w-full min-h-[40px] rounded-full bg-[#f1f4f9] hover:bg-[#e7ecf5] text-[#181b22] text-[12.5px] font-semibold transition active:scale-[0.98] flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+            </svg>
+            <span>Copy Subject &amp; Full Email Text</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           OVERLAY SHEET 2: GLOBAL RECIPIENTS DIRECTORY
+           ==================================================================== -->
+      <div
+        id="directorySheet"
+        class="card-sheet sheet-hidden absolute inset-0 z-30 p-6 sm:p-8 flex flex-col justify-between overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Recipients Directory"
+      >
+        <div class="flex items-center justify-between mb-4 shrink-0">
+          <div>
+            <div class="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-[#eb2175]">Global Contacts</div>
+            <h2 class="text-[23px] font-bold tracking-[-0.03em] text-[#111318] mt-0.5">Recipients Directory</h2>
+          </div>
+          <button
+            id="closeDirectoryBtn"
+            type="button"
+            class="dock-circle-btn w-10 h-10 rounded-full flex items-center justify-center text-[#4a5160] hover:text-[#111318] cursor-pointer"
+            aria-label="Close directory"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div id="directoryList" class="flex-1 overflow-y-auto soft-scroll space-y-2.5 pr-1">
+          <!-- Populated via JS -->
+        </div>
+
+        <p class="text-[11.5px] text-[#8a919e] text-center pt-3 shrink-0">
+          Tap any contact group to select it for your email appeal.
+        </p>
+      </div>
+
+      <!-- ====================================================================
+           OVERLAY SHEET 3: SHARE & AMPLIFY CAMPAIGN
+           ==================================================================== -->
+      <div
+        id="shareSheet"
+        class="card-sheet sheet-hidden absolute inset-0 z-30 p-6 sm:p-8 flex flex-col justify-between"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Share Campaign"
+      >
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <div class="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-[#eb2175]">Spread the Word</div>
+              <h2 class="text-[23px] font-bold tracking-[-0.03em] text-[#111318] mt-0.5">Amplify This Voice</h2>
+            </div>
+            <button
+              id="closeShareBtn"
+              type="button"
+              class="dock-circle-btn w-10 h-10 rounded-full flex items-center justify-center text-[#4a5160] hover:text-[#111318] cursor-pointer"
+              aria-label="Close share sheet"
+            >
+              ✕
+            </button>
+          </div>
+
+          <p class="text-[13.5px] text-[#6d7480] leading-relaxed mb-4">
+            Every shared link brings more global attention to custodial safety, fair trial rights, and rule of law.
+          </p>
+
+          <!-- Share Message Preview Box -->
+          <div class="rounded-[22px] bg-white/95 border border-slate-200/80 p-4 shadow-sm mb-4">
+            <div class="text-[11px] font-semibold uppercase tracking-wider text-[#8c93a0] mb-1.5">Ready Share Message</div>
+            <p id="shareMessageBox" class="text-[13px] leading-relaxed text-[#252a36]">
+              Stand up for human rights and justice. Take 30 seconds to generate and send a personalized email appeal for Imran Khan's custodial safety and fair legal rights. Your voice matters!
+            </p>
+          </div>
+
+          <div class="space-y-2.5">
+            <button
+              id="sheetWhatsAppBtn"
+              type="button"
+              class="w-full min-h-[46px] rounded-full bg-[#25D366] hover:bg-[#1fbd5b] text-white text-[14px] font-semibold shadow-md flex items-center justify-center gap-2 transition active:scale-[0.98] cursor-pointer"
+            >
+              <span>Share Directly on WhatsApp</span>
+            </button>
+
+            <button
+              id="sheetCopyMsgBtn"
+              type="button"
+              class="w-full min-h-[46px] rounded-full bg-[#111318] hover:bg-[#232732] text-white text-[14px] font-semibold shadow-md flex items-center justify-center gap-2 transition active:scale-[0.98] cursor-pointer"
+            >
+              <span>Copy Share Message</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-4 text-center">
+          <span class="inline-flex items-center gap-1.5 text-[11.5px] font-medium text-[#7e8694] bg-white/80 px-3 py-1 rounded-full border border-slate-200/70">
+            <span class="w-2 h-2 rounded-full bg-[#f81b7c]"></span>
+            Zero personal data stored on servers
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FOOTER & REQUIRED BRANDING: POWERED BY SAQIB
+         ====================================================================== -->
+    <footer class="w-full max-w-[460px] mx-auto mt-6 text-center space-y-2.5 px-4">
+      <p class="text-[11.5px] leading-relaxed text-[#8d95a3]">
+        This tool runs 100% in your browser and does not store your personal data. You have full control to review and edit your email before sending.
+      </p>
+
+      <!-- Signature "Powered by Saqib" Pill Badge & Official Website Button -->
+      <div class="pt-1 flex flex-col items-center gap-2">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-white shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-[#f81b7c]"></span>
+          <span class="text-[12.5px] font-medium text-[#6c7380]">Powered by</span>
+          <span class="text-[13px] font-bold tracking-[-0.01em] text-[#111318]">Saqib</span>
+        </div>
+
+        <a
+          href="https://mrsaqib.me"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#111318] hover:bg-[#232732] text-white text-[12px] font-semibold tracking-[-0.01em] shadow-sm transition active:scale-95"
+        >
+          <svg class="w-3.5 h-3.5 text-[#f81b7c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 0 0 18M12 3a14 14 0 0 1 0 18" />
+          </svg>
+          <span>mrsaqib.me</span>
+          <svg class="w-3 h-3 opacity-75" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17 17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Floating Editorial Toast Notification (Never uses alert()) -->
+  <div
+    id="toastPill"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 translate-y-6 opacity-0 pointer-events-none z-50 bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-xl px-4 py-2.5 rounded-full text-[12.5px] font-semibold text-[#14171f] flex items-center gap-2 transition-all duration-300"
+    role="status"
+    aria-live="polite"
+  >
+    <span class="w-2 h-2 rounded-full bg-[#f81b7c]"></span>
+    <span id="toastText">Ready</span>
+  </div>
+
+  <!-- ========================================================================
+       INTERACTIVE JUSTICE EMAIL GENERATOR ENGINE
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------------------------------------
+         4. RECIPIENT TARGET GROUPS & AUTO-MAPPED CONTACTS
+         ---------------------------------------------------------------------- */
+      const RECIPIENT_GROUPS = [
+        {
+          id: 'all',
+          label: 'All Key Bodies',
+          tag: 'Default Auto',
+          pillClass: 'pill-peach',
+          emails: 'ohchr-InfoDesk@un.org, contactus@amnesty.org, hrwpress@hrw.org, fcdo.correspondence@fcdo.gov.uk, info@eeas.europa.eu',
+          description: 'Automatically addresses UN Human Rights, Amnesty International, Human Rights Watch, and international diplomatic desks.'
+        },
+        {
+          id: 'un',
+          label: 'UN Human Rights',
+          tag: 'OHCHR Geneva',
+          pillClass: 'pill-sky',
+          emails: 'ohchr-InfoDesk@un.org, ohchr-civilsociety@un.org',
+          description: 'Office of the United Nations High Commissioner for Human Rights (OHCHR) public inquiry & civil society desks.'
+        },
+        {
+          id: 'amnesty',
+          label: 'Amnesty Intl',
+          tag: 'Human Rights',
+          pillClass: 'pill-amber',
+          emails: 'contactus@amnesty.org',
+          description: 'Amnesty International global secretariat — monitoring detention conditions, fair trials, and prisoners of conscience.'
+        },
+        {
+          id: 'hrw',
+          label: 'Human Rights Watch',
+          tag: 'Asia Desk',
+          pillClass: 'pill-pink',
+          emails: 'hrwpress@hrw.org',
+          description: 'Human Rights Watch international research and advocacy office covering South Asia legal and detention standards.'
+        },
+        {
+          id: 'diplomatic',
+          label: 'UK / EU Offices',
+          tag: 'Foreign Affairs',
+          pillClass: 'pill-mint',
+          emails: 'fcdo.correspondence@fcdo.gov.uk, info@eeas.europa.eu',
+          description: 'UK Foreign, Commonwealth & Development Office and European External Action Service public correspondence desks.'
+        }
+      ];
+
+      /* ----------------------------------------------------------------------
+         5. MULTI-VARIATION EMAIL GENERATOR TEMPLATES (Urgent Justice Appeal)
+         ---------------------------------------------------------------------- */
+      function buildEmailDraft(name, country, city, recipientId, variantIndex) {
+        const locationLine = city ? `${city}, ${country}` : country;
+        const todayStr = new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+
+        const salutationMap = {
+          all: 'Dear Representatives and Human Rights Officials,',
+          un: 'Dear Office of the UN High Commissioner for Human Rights,',
+          amnesty: 'Dear Amnesty International Secretariat,',
+          hrw: 'Dear Human Rights Watch Advocacy Team,',
+          diplomatic: 'Dear Foreign Affairs & Parliamentary Representatives,'
+        };
+
+        const salutation = salutationMap[recipientId] || 'Dear Sir / Madam,';
+
+        const subjects = [
+          `Urgent Appeal: Imran Khan at Risk — Ensure Custodial Safety & Justice (${country})`,
+          `Immediate Action Needed: Protect Custodial Safety & Human Rights of Imran Khan`,
+          `Urgent Concern from ${locationLine}: Safeguarding the Life & Legal Rights of Imran Khan`
+        ];
+
+        const bodies = [
+          `${salutation}\n\nI am writing to you from ${locationLine} on ${todayStr} with grave and urgent concern regarding the custodial safety, health, and fundamental legal rights of former Prime Minister Imran Khan.\n\nCredible reports regarding restrictive detention conditions, limited access to legal counsel and family, and serious threats to his personal safety require immediate international attention. Under international law and human rights covenants, authorities bear full responsibility for safeguarding the life, dignity, and well-being of every detainee.\n\nI respectfully and urgently ask your office to:\n1. Demand immediate, transparent, and independent monitoring of Imran Khan's custodial safety and health.\n2. Ensure unrestricted access to his chosen personal physicians, legal team, and family members.\n3. Advocate firmly for fair, transparent, and constitutional due process and the rule of law.\n\nTimely international engagement can prevent irreversible harm and uphold justice and human dignity.\n\nThank you for your urgent attention to this critical matter.\n\nSincerely,\n${name}\n${locationLine}`,
+          `${salutation}\n\nAs a concerned citizen writing from ${locationLine}, I urgently appeal to your institution to intervene and raise your voice regarding the safety and lawful treatment of Imran Khan in custody.\n\nOngoing concerns about isolation, restricted medical verification, and prolonged legal proceedings raise serious alarms about custodial risk and compliance with international human rights standards.\n\nWe urgently ask your office to issue a clear public statement and engage diplomatically to guarantee:\n• Full protection of Imran Khan's physical safety and well-being in custody.\n• Regular, unhindered access to family, lawyers, and independent doctors.\n• Fair trial guarantees in accordance with international human rights law.\n\nYour swift action carries immense weight in upholding justice and preventing any custodial tragedy.\n\nWith respect,\n${name}\n${locationLine}`,
+          `${salutation}\n\nWriting from ${locationLine} on ${todayStr}, I wish to place on record my deep concern regarding the safety, detention conditions, and judicial fairness afforded to former Prime Minister Imran Khan.\n\nTransparent legal hearings, independent medical care, and regular family contact are fundamental human rights under the Universal Declaration of Human Rights and ICCPR. I urge your team to seek immediate assurances regarding his physical safety and call upon relevant authorities to respect constitutional due process and international detention safeguards.\n\nThank you for standing up for justice and accountability.\n\nSincerely,\n${name}\n${locationLine}`
+        ];
+
+        return {
+          subject: subjects[variantIndex % subjects.length],
+          body: bodies[variantIndex % bodies.length]
+        };
+      }
+
+      /* ----------------------------------------------------------------------
+         6. APPLICATION STATE & DOM REFERENCES
+         ---------------------------------------------------------------------- */
+      const state = {
+        activePillId: null,
+        selectedRecipientId: 'all',
+        variationIndex: 0,
+        toastTimer: null
+      };
+
+      const els = {
+        liveDateDisplay: document.getElementById('liveDateDisplay'),
+        liveTimeDisplay: document.getElementById('liveTimeDisplay'),
+        narrativeContainer: document.getElementById('narrativeContainer'),
+        microInsightPanel: document.getElementById('microInsightPanel'),
+        microBadgeDot: document.getElementById('microBadgeDot'),
+        microTitle: document.getElementById('microTitle'),
+        microBody: document.getElementById('microBody'),
+        microStatTag: document.getElementById('microStatTag'),
+        closeMicroBtn: document.getElementById('closeMicroBtn'),
+        contactForm: document.getElementById('contactForm'),
+        fullName: document.getElementById('fullName'),
+        countrySelect: document.getElementById('countrySelect'),
+        cityInput: document.getElementById('cityInput'),
+        clearCityBtn: document.getElementById('clearCityBtn'),
+        formError: document.getElementById('formError'),
+        quickWhatsAppBtn: document.getElementById('quickWhatsAppBtn'),
+        quickCopyShareBtn: document.getElementById('quickCopyShareBtn'),
+        homeBtn: document.getElementById('homeBtn'),
+        directoryBtn: document.getElementById('directoryBtn'),
+        shareSheetBtn: document.getElementById('shareSheetBtn'),
+        previewSheet: document.getElementById('previewSheet'),
+        closePreviewBtn: document.getElementById('closePreviewBtn'),
+        regenerateBtn: document.getElementById('regenerateBtn'),
+        previewTo: document.getElementById('previewTo'),
+        previewSubject: document.getElementById('previewSubject'),
+        previewBody: document.getElementById('previewBody'),
+        variationBadge: document.getElementById('variationBadge'),
+        copyToBtn: document.getElementById('copyToBtn'),
+        openMailAppBtn: document.getElementById('openMailAppBtn'),
+        openGmailBtn: document.getElementById('openGmailBtn'),
+        copyFullEmailBtn: document.getElementById('copyFullEmailBtn'),
+        directorySheet: document.getElementById('directorySheet'),
+        closeDirectoryBtn: document.getElementById('closeDirectoryBtn'),
+        directoryList: document.getElementById('directoryList'),
+        shareSheet: document.getElementById('shareSheet'),
+        closeShareBtn: document.getElementById('closeShareBtn'),
+        shareMessageBox: document.getElementById('shareMessageBox'),
+        sheetWhatsAppBtn: document.getElementById('sheetWhatsAppBtn'),
+        sheetCopyMsgBtn: document.getElementById('sheetCopyMsgBtn'),
+        toastPill: document.getElementById('toastPill'),
+        toastText: document.getElementById('toastText')
+      };
+
+      /* ----------------------------------------------------------------------
+         7. UTILITIES (Toast & Safe iFrame Clipboard Copy)
+         ---------------------------------------------------------------------- */
+      function showToast(msg) {
+        els.toastText.textContent = msg;
+        els.toastPill.classList.remove('opacity-0', 'translate-y-6');
+        els.toastPill.classList.add('opacity-100', 'translate-y-0');
+        if (state.toastTimer) clearTimeout(state.toastTimer);
+        state.toastTimer = setTimeout(() => {
+          els.toastPill.classList.remove('opacity-100', 'translate-y-0');
+          els.toastPill.classList.add('opacity-0', 'translate-y-6');
+        }, 2200);
+      }
+
+      // Reliable clipboard helper using document.execCommand('copy') for iFrame support
+      function copyTextToClipboard(text, successMsg) {
+        try {
+          const tempArea = document.createElement('textarea');
+          tempArea.value = text;
+          tempArea.setAttribute('readonly', '');
+          tempArea.style.position = 'fixed';
+          tempArea.style.top = '-9999px';
+          tempArea.style.left = '-9999px';
+          document.body.appendChild(tempArea);
+          tempArea.focus();
+          tempArea.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(tempArea);
+          if (ok) {
+            showToast(successMsg || 'Copied to clipboard');
+          } else {
+            showToast('Select text manually to copy');
+          }
+        } catch (err) {
+          console.error('Copy error:', err);
+          showToast('Unable to copy automatically');
+        }
+      }
+
+      // Live Local Date & Time updater (displays user's own local device clock)
+      function updateLiveClock() {
+        const now = new Date();
+        els.liveDateDisplay.textContent = now.toLocaleDateString(undefined, {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        });
+        els.liveTimeDisplay.textContent = now.toLocaleTimeString(undefined, {
+          hour: 'numeric',
+          minute: '2-digit'
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         8. RENDER NARRATIVE PILLS, COUNTRIES (PAKISTAN DEFAULT) & DIRECTORY
+         ---------------------------------------------------------------------- */
+      const PILL_ICONS = {
+        shield: `<svg class="w-3.5 h-3.5 text-[#ff6d28] shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 4 5v6.1c0 5.1 3.4 9.8 8 10.9 4.6-1.1 8-5.8 8-10.9V5l-8-3Z"/></svg>`,
+        scale: `<svg class="w-3.5 h-3.5 text-[#1f82eb] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 7h14"/><path d="m3 14 2-7 2 7a2 2 0 0 1-4 0Z"/><path d="m17 14 2-7 2 7a2 2 0 0 1-4 0Z"/></svg>`,
+        heart: `<svg class="w-3.5 h-3.5 text-[#f03684] shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-8.5C.8 9.1 2.7 5 6.5 5c2.1 0 3.7 1.1 4.5 2.4h2c.8-1.3 2.4-2.4 4.5-2.4 3.8 0 5.7 4.1 3.8 7.5C19 16.6 12 21 12 21Z"/></svg>`,
+        globe: `<svg class="w-3.5 h-3.5 text-[#16a34a] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 0 0 18M12 3a14 14 0 0 1 0 18"/></svg>`
+      };
+
+      /* ----------------------------------------------------------------------
+         2. INTERACTIVE NARRATIVE SEGMENTS (Clickable Semantic Pills)
+         ---------------------------------------------------------------------- */
+      const NARRATIVE_SEGMENTS = [
+        { type: 'text', text: 'Your voice strengthens ' },
+        {
+          type: 'pill',
+          id: 'safety',
+          label: 'custodial safety',
+          icon: 'shield',
+          style: 'pill-peach',
+          dotColor: '#ff6d28',
+          stat: 'Immediate protection',
+          title: 'Custodial Safety & Health Access',
+          body: 'Appeals urgently request transparent independent monitoring, access to personal physicians, and guaranteed safety while in detention.'
+        },
+        { type: 'text', text: ', upholds ' },
+        {
+          type: 'pill',
+          id: 'rights',
+          label: 'human rights',
+          icon: 'heart',
+          style: 'pill-pink',
+          dotColor: '#f03684',
+          stat: 'UN Charter',
+          title: 'Fundamental Human Rights',
+          body: 'Calls for full compliance with international human rights covenants, family visitation rights, and unrestricted legal counsel.'
+        },
+        { type: 'text', text: ', and demands ' },
+        {
+          type: 'pill',
+          id: 'justice',
+          label: 'fair justice',
+          icon: 'scale',
+          style: 'pill-sky',
+          dotColor: '#1f82eb',
+          stat: 'Rule of law',
+          title: 'Due Process & Fair Trial',
+          body: 'Urges adherence to constitutional due process, independent judicial review, and an immediate end to politically motivated proceedings.'
+        },
+        { type: 'text', text: ' from ' },
+        {
+          type: 'pill',
+          id: 'leaders',
+          label: 'global bodies',
+          icon: 'globe',
+          style: 'pill-mint',
+          dotColor: '#16a34a',
+          stat: '5 key desks',
+          title: 'International Representatives',
+          body: 'Routes your personalized email directly to UN Human Rights, Amnesty International, Human Rights Watch, and diplomatic offices.'
+        },
+        { type: 'text', text: '.' }
+      ];
+
+      /* ----------------------------------------------------------------------
+         3. FULL ALPHABETICAL COUNTRY LIST (Matching First Uploaded File)
+         ---------------------------------------------------------------------- */
+      const COUNTRIES = [
+        'Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria',
+        'Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan',
+        'Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burundi','Cabo Verde','Cambodia',
+        'Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo','Costa Rica',
+        'Croatia','Cuba','Czech Republic','Democratic Republic of the Congo','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt',
+        'El Salvador','Equatorial Guinea','Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Finland','France','Gabon',
+        'Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana',
+        'Haiti','Honduras','Hong Kong','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland',
+        'Israel','Italy','Ivory Coast','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Kosovo',
+        'Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania',
+        'Luxembourg','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius',
+        'Mexico','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Myanmar','Namibia',
+        'Nauru','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','North Macedonia','Norway',
+        'Oman','Pakistan','Palau','Palestine','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland',
+        'Portugal','Qatar','Republic of Cyprus','Romania','Russia','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Samoa',
+        'San Marino','Sao Tome and Principe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia',
+        'Solomon Islands','Somalia','South Africa','South Korea','South Sudan','Spain','Sri Lanka','Sudan','Suriname','Sweden',
+        'Switzerland','Syria','Taiwan','Tajikistan','Tanzania','Thailand','Timor-Leste','Togo','Tonga','Trinidad and Tobago',
+        'Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom','United States','Uruguay',
+        'Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe','Other'
+      ];
+
+      /* ----------------------------------------------------------------------
+         9. RENDER NARRATIVE PILLS, COUNTRIES (PAKISTAN DEFAULT) & DIRECTORY
+         ---------------------------------------------------------------------- */
+      function openMicroInsight(config) {
+        els.microBadgeDot.style.background = config.dotColor || '#f81b7c';
+        els.microTitle.textContent = config.title;
+        els.microBody.textContent = config.body;
+        els.microStatTag.textContent = config.stat;
+        els.microInsightPanel.classList.add('open');
+      }
+
+      function closeMicroInsight() {
+        state.activePillId = null;
+        els.microInsightPanel.classList.remove('open');
+        els.narrativeContainer.querySelectorAll('.semantic-pill').forEach((btn) => {
+          btn.classList.remove('pill-active');
+        });
+      }
+
+      function renderNarrative() {
+        els.narrativeContainer.innerHTML = '';
+        const p = document.createElement('p');
+        p.className = 'm-0';
+
+        NARRATIVE_SEGMENTS.forEach((seg) => {
+          if (seg.type === 'text') {
+            p.appendChild(document.createTextNode(seg.text));
+          } else if (seg.type === 'pill') {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.dataset.pillId = seg.id;
+            btn.className = `semantic-pill ${seg.style}`;
+            btn.innerHTML = `${PILL_ICONS[seg.icon] || ''}<span>${seg.label}</span>`;
+            btn.setAttribute('aria-label', `Learn more about ${seg.label}`);
+
+            btn.addEventListener('click', () => {
+              if (state.activePillId === seg.id) {
+                closeMicroInsight();
+                return;
+              }
+              state.activePillId = seg.id;
+              els.narrativeContainer.querySelectorAll('.semantic-pill').forEach((el) => {
+                el.classList.toggle('pill-active', el.dataset.pillId === seg.id);
+              });
+              openMicroInsight(seg);
+            });
+
+            p.appendChild(btn);
+          }
+        });
+
+        els.narrativeContainer.appendChild(p);
+      }
+
+      function populateCountries() {
+        const frag = document.createDocumentFragment();
+        COUNTRIES.forEach((country) => {
+          const opt = document.createElement('option');
+          opt.value = country;
+          opt.textContent = country;
+          if (country === 'Pakistan') {
+            opt.selected = true;
+          }
+          frag.appendChild(opt);
+        });
+        els.countrySelect.appendChild(frag);
+        els.countrySelect.value = 'Pakistan';
+      }
+
+      function renderDirectoryList() {
+        els.directoryList.innerHTML = RECIPIENT_GROUPS.map((g) => {
+          const isSelected = g.id === state.selectedRecipientId;
+          return `
+            <div
+              data-dir-id="${g.id}"
+              class="p-3.5 rounded-[22px] border transition-all cursor-pointer ${
+                isSelected
+                  ? 'bg-[#111318] text-white border-[#111318] shadow-md'
+                  : 'bg-white/95 text-[#14171f] border-slate-200/80 hover:bg-white hover:shadow-sm'
+              }"
+            >
+              <div class="flex items-center justify-between gap-2">
+                <div class="text-[14px] font-bold">${g.label}</div>
+                <span class="text-[10.5px] font-semibold px-2.5 py-0.5 rounded-full ${
+                  isSelected ? 'bg-white/15 text-white' : `${g.pillClass} text-[#14171f]`
+                }">
+                  ${g.tag}
+                </span>
+              </div>
+              <p class="text-[11.5px] mt-1 leading-relaxed ${isSelected ? 'text-slate-300' : 'text-[#6c7380]'}">
+                ${g.description}
+              </p>
+              <div class="mt-2 flex items-center justify-between gap-2 pt-2 border-t ${isSelected ? 'border-white/15' : 'border-slate-100'}">
+                <span class="text-[11px] font-mono truncate ${isSelected ? 'text-pink-200' : 'text-[#475569]'}">${g.emails}</span>
+                <button
+                  type="button"
+                  data-copy-email="${g.emails}"
+                  class="shrink-0 text-[11px] font-semibold px-2.5 py-1 rounded-full ${
+                    isSelected ? 'bg-white text-[#111318]' : 'bg-[#f1f4f9] text-[#111318] hover:bg-slate-200'
+                  } cursor-pointer"
+                >
+                  Copy
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        els.directoryList.querySelectorAll('[data-dir-id]').forEach((card) => {
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('[data-copy-email]')) return;
+            state.selectedRecipientId = card.dataset.dirId;
+            renderDirectoryList();
+            closeAllSheets();
+            const chosen = RECIPIENT_GROUPS.find((x) => x.id === state.selectedRecipientId);
+            showToast(`Recipients set: ${chosen ? chosen.label : 'All Key Bodies'}`);
+          });
+        });
+
+        els.directoryList.querySelectorAll('[data-copy-email]').forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            copyTextToClipboard(btn.dataset.copyEmail, 'Recipient emails copied');
+          });
+        });
+      }
+
+      /* ----------------------------------------------------------------------
+         10. OVERLAY SHEET MANAGEMENT
+         ---------------------------------------------------------------------- */
+      function closeAllSheets() {
+        [els.previewSheet, els.directorySheet, els.shareSheet].forEach((sh) => {
+          sh.classList.remove('sheet-visible');
+          sh.classList.add('sheet-hidden');
+        });
+        [els.directoryBtn, els.shareSheetBtn].forEach((b) => b.classList.remove('is-active'));
+      }
+
+      function openSheet(sheetEl, triggerBtn) {
+        closeAllSheets();
+        sheetEl.classList.remove('sheet-hidden');
+        sheetEl.classList.add('sheet-visible');
+        if (triggerBtn) triggerBtn.classList.add('is-active');
+      }
+
+      /* ----------------------------------------------------------------------
+         11. GENERATE & POPULATE EMAIL PREVIEW
+         ---------------------------------------------------------------------- */
+      function populateEmailPreview() {
+        const name = els.fullName.value.trim();
+        const country = els.countrySelect.value || 'Pakistan';
+        const city = els.cityInput.value.trim();
+
+        if (!name || !country) {
+          els.formError.classList.remove('hidden');
+          if (!name) els.fullName.focus();
+          else els.countrySelect.focus();
+          return false;
+        }
+
+        els.formError.classList.add('hidden');
+
+        const group = RECIPIENT_GROUPS.find((g) => g.id === state.selectedRecipientId) || RECIPIENT_GROUPS[0];
+        const draft = buildEmailDraft(name, country, city, group.id, state.variationIndex);
+
+        els.previewTo.value = group.emails;
+        els.previewSubject.value = draft.subject;
+        els.previewBody.value = draft.body;
+        els.variationBadge.textContent = `Draft #${(state.variationIndex % 3) + 1}`;
+
+        openSheet(els.previewSheet, null);
+        return true;
+      }
+
+      /* ----------------------------------------------------------------------
+         12. SEND & SHARE HANDLERS (Mailto, Gmail Web, WhatsApp, Copy)
+         ---------------------------------------------------------------------- */
+      function openDefaultMailApp() {
+        const to = encodeURIComponent(els.previewTo.value.trim());
+        const subject = encodeURIComponent(els.previewSubject.value.trim());
+        const body = encodeURIComponent(els.previewBody.value.trim());
+        const mailtoLink = `mailto:${to}?subject=${subject}&body=${body}`;
+        window.location.href = mailtoLink;
+        showToast('Opening your email app...');
+      }
+
+      function openGmailCompose() {
+        const to = encodeURIComponent(els.previewTo.value.trim());
+        const subject = encodeURIComponent(els.previewSubject.value.trim());
+        const body = encodeURIComponent(els.previewBody.value.trim());
+        const gmailUrl = ['https://', 'mail.google.com/mail/?view=cm&fs=1', `&to=${to}`, `&su=${subject}`, `&body=${body}`].join('');
+        window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+        showToast('Opening Gmail compose...');
+      }
+
+      function getShareText() {
+        const pageUrl = window.location.href.startsWith('http') ? `\n${window.location.href}` : '';
+        return `${els.shareMessageBox.textContent.trim()}${pageUrl}`;
+      }
+
+      function shareOnWhatsApp() {
+        const encoded = encodeURIComponent(getShareText());
+        window.open(`https://wa.me/?text=${encoded}`, '_blank', 'noopener,noreferrer');
+        showToast('Opening WhatsApp share...');
+      }
+
+      /* ----------------------------------------------------------------------
+         13. EVENT LISTENERS
+         ---------------------------------------------------------------------- */
+      els.closeMicroBtn.addEventListener('click', closeMicroInsight);
+
+      // Clear City toggle
+      function syncClearCityButton() {
+        els.clearCityBtn.classList.toggle('hidden', els.cityInput.value.trim().length === 0);
+      }
+      els.cityInput.addEventListener('input', syncClearCityButton);
+      els.clearCityBtn.addEventListener('click', () => {
+        els.cityInput.value = '';
+        syncClearCityButton();
+        els.cityInput.focus();
+      });
+
+      // Hide inline error when user types
+      els.fullName.addEventListener('input', () => els.formError.classList.add('hidden'));
+      els.countrySelect.addEventListener('change', () => els.formError.classList.add('hidden'));
+
+      // Form submission -> Generate Email
+      els.contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const ok = populateEmailPreview();
+        if (ok) showToast('Personalized email generated!');
+      });
+
+      // Preview sheet controls
+      els.closePreviewBtn.addEventListener('click', closeAllSheets);
+      els.regenerateBtn.addEventListener('click', () => {
+        state.variationIndex += 1;
+        populateEmailPreview();
+        showToast('Generated a fresh email variation');
+      });
+
+      els.copyToBtn.addEventListener('click', () => {
+        copyTextToClipboard(els.previewTo.value.trim(), 'Recipient emails copied');
+      });
+
+      els.copyFullEmailBtn.addEventListener('click', () => {
+        const fullText = `To: ${els.previewTo.value.trim()}\nSubject: ${els.previewSubject.value.trim()}\n\n${els.previewBody.value.trim()}`;
+        copyTextToClipboard(fullText, 'Full email copied to clipboard');
+      });
+
+      els.openMailAppBtn.addEventListener('click', openDefaultMailApp);
+      els.openGmailBtn.addEventListener('click', openGmailCompose);
+
+      // Quick Share buttons
+      els.quickWhatsAppBtn.addEventListener('click', shareOnWhatsApp);
+      els.quickCopyShareBtn.addEventListener('click', () => {
+        copyTextToClipboard(getShareText(), 'Share message copied!');
+      });
+
+      // Share Sheet buttons
+      els.sheetWhatsAppBtn.addEventListener('click', shareOnWhatsApp);
+      els.sheetCopyMsgBtn.addEventListener('click', () => {
+        copyTextToClipboard(getShareText(), 'Share message copied!');
+      });
+
+      // Bottom Dock & Directory Links
+      els.homeBtn.addEventListener('click', () => {
+        closeAllSheets();
+        closeMicroInsight();
+        showToast('Back to compose form');
+      });
+
+      els.directoryBtn.addEventListener('click', () => {
+        renderDirectoryList();
+        openSheet(els.directorySheet, els.directoryBtn);
+      });
+
+      els.closeDirectoryBtn.addEventListener('click', closeAllSheets);
+
+      els.shareSheetBtn.addEventListener('click', () => {
+        openSheet(els.shareSheet, els.shareSheetBtn);
+      });
+      els.closeShareBtn.addEventListener('click', closeAllSheets);
+
+      /* ----------------------------------------------------------------------
+         13. INITIALIZE APP
+         ---------------------------------------------------------------------- */
+      window.addEventListener('DOMContentLoaded', () => {
+        updateLiveClock();
+        setInterval(updateLiveClock, 1000);
+        renderNarrative();
+        populateCountries();
+        renderDirectoryList();
+        syncClearCityButton();
+      });
+    })();
+  </script>
+</body>
+</html>
